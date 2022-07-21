@@ -7,9 +7,9 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/song-list')
-def song_list():
-    return render_template('song-list.html')
+@app.route('/camera_feed')
+def camera_feed():
+    return render_template('camera_feed.html')
 
 
 if __name__ == '__main__':

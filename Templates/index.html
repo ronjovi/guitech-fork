@@ -2,9 +2,64 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>GuiTech</title>
+    <title>Title</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1> GuiTech HomeScreen </h1>
+
+    <div class="banner">
+        <div class="banner__contents">
+            <h1 class ="banner__title">FEATURED SONGS</h1>
+            <div class="banner__buttons">
+                <button class="banner__button">Play</button>
+                <button class="banner__button">List</button>
+    </div>
+        <div class="banner__description">
+            Text
+        </div>
+    </div>
+    </div>
+
+
+    <div class="row">
+    <h2> BEGINNER </h2>
+    <div class="row__posters">
+        <img src={{ url_for('static', filename='images/music-placeholder.png')}}>
+        <img src={{ url_for('static', filename='images/music-placeholder.png')}}>
+        <img src={{ url_for('static', filename='images/music-placeholder.png')}}>
+        <img src={{ url_for('static', filename='images/music-placeholder.png')}}>
+        <img src={{ url_for('static', filename='images/music-placeholder.png')}}>
+        <img src={{ url_for('static', filename='images/music-placeholder.png')}}>
+        <img src={{ url_for('static', filename='images/music-placeholder.png')}}>
+        <img src={{ url_for('static', filename='images/music-placeholder.png')}}>
+    </div>
+
+        <div class="row">
+    <h2> I </h2>
+    <div class="row__posters">
+        <img src={{ url_for('static', filename='images/music-placeholder.png')}}>
+        <img src={{ url_for('static', filename='images/music-placeholder.png')}}>
+        <img src={{ url_for('static', filename='images/music-placeholder.png')}}>
+        <img src={{ url_for('static', filename='images/music-placeholder.png')}}>
+        <img src={{ url_for('static', filename='images/music-placeholder.png')}}>
+        <img src={{ url_for('static', filename='images/music-placeholder.png')}}>
+        <img src={{ url_for('static', filename='images/music-placeholder.png')}}>
+        <img src={{ url_for('static', filename='images/music-placeholder.png')}}>
+    </div>
+
+            <div class="row">
+    <h2> A </h2>
+    <div class="row__posters">
+        <img src={{ url_for('static', filename='images/music-placeholder.png')}}>
+        <img src={{ url_for('static', filename='images/music-placeholder.png')}}>
+        <img src={{ url_for('static', filename='images/music-placeholder.png')}}>
+        <img src={{ url_for('static', filename='images/music-placeholder.png')}}>
+        <img src={{ url_for('static', filename='images/music-placeholder.png')}}>
+        <img src={{ url_for('static', filename='images/music-placeholder.png')}}>
+        <img src={{ url_for('static', filename='images/music-placeholder.png')}}>
+        <img src={{ url_for('static', filename='images/music-placeholder.png')}}>
+    </div>
+
+    </div>
 </body>
 </html>
