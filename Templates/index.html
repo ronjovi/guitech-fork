@@ -6,31 +6,53 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+  <div class="22">
+      <nav>
+          <h2 class="logo">GUITECH</h2>
+          <ul>
+            <li><a href="#">HOME</a> </li>
+            <li><a href="#">PLAY</a> </li>
+            <li><a href="#">3</a> </li>
+            <li><a href="#">4</a> </li>
+          </ul>
+          <button type="button">Login</button>
+      </nav>
+  </div>
 
-<div className = "navbar">
-<nav>
-    <ul>
-        <li>
-            <a href="#" class="logo">
-                <img src="/music-placeholder" alt="">
-                <span class="nav-item">GuiTech</span>
-            </a>
-        </li>
-        <li><a href="#">
-            <i class="fas fa-home"></i>
-            <span class="nav-item">HOME</span>
-        </a></li>
-        <li><a href="#">
-            <i class="fas fa-search"></i>
-            <span class="nav-item">SEARCH</span>
-        </a></li>
-        <li><a href="#" class="logout">
-        <i class="fas fa-sign-out-alt"></i>
-            <span class="nav-item">EXIT</span>
-        </a></li>
-    </ul>
-</nav>
-</div>
+<!--  <div class="image">-->
+<!--      <img class="image__img" src={{ url_for('static', filename='images/music-placeholder.png')}}>-->
+<!--      <div class="image__overlay">-->
+<!--          <div class="image__title">Bricks</div>-->
+<!--          <p class="image__description">Song</p>-->
+<!--      </div>-->
+<!--  </div>-->
+
+
+<!--<div className = "navbar">-->
+<!--<nav>-->
+<!--    <ul>-->
+<!--        <li>-->
+<!--            <a href="#" class="logo">-->
+<!--                <img src="/music-placeholder" alt="">-->
+<!--                <span class="nav-item">GuiTech</span>-->
+<!--            </a>-->
+<!--        </li>-->
+<!--        <li><a href="#">-->
+<!--            <i class="fas fa-home"></i>-->
+<!--            <span class="nav-item">HOME</span>-->
+<!--        </a></li>-->
+<!--        <li><a href="#">-->
+<!--            <i class="fas fa-search"></i>-->
+<!--            <span class="nav-item">SEARCH</span>-->
+<!--        </a></li>-->
+<!--        <li><a href="#" class="logout">-->
+<!--        <i class="fas fa-sign-out-alt"></i>-->
+<!--            <span class="nav-item">EXIT</span>-->
+<!--        </a></li>-->
+<!--    </ul>-->
+<!--</nav>-->
+<!--</div>-->
+
 <!--    <div class="banner">-->
 <!--        <div class="banner__contents">-->
 <!--            <h1 class ="banner__title">FEATURED SONGS</h1>-->
@@ -46,42 +68,39 @@
 
 
 <div class="row1">
-    <h2> BEGINNER </h2>
+    <h2 class="BEGINNER"> BEGINNER </h2>
     <div class="row__posters">
-        <img src={{ url_for('static', filename='images/music-placeholder.png')}}>
-        <img src={{ url_for('static', filename='images/music-placeholder.png')}}>
-        <img src={{ url_for('static', filename='images/music-placeholder.png')}}>
-        <img src={{ url_for('static', filename='images/music-placeholder.png')}}>
-        <img src={{ url_for('static', filename='images/music-placeholder.png')}}>
-        <img src={{ url_for('static', filename='images/music-placeholder.png')}}>
-        <img src={{ url_for('static', filename='images/music-placeholder.png')}}>
-        <img src={{ url_for('static', filename='images/music-placeholder.png')}}>
+            <img class="album" src={{ url_for('static', filename='images/music-placeholder.png')}}>
+        <img class="album" src={{ url_for('static', filename='images/music-placeholder.png')}}>
+        <img class="album" src={{ url_for('static', filename='images/music-placeholder.png')}}>
+        <img class="album" src={{ url_for('static', filename='images/music-placeholder.png')}}>
+        <img class="album" src={{ url_for('static', filename='images/music-placeholder.png')}}>
+        <img class="album" src={{ url_for('static', filename='images/music-placeholder.png')}}>
+        <img class="album" src={{ url_for('static', filename='images/music-placeholder.png')}}>
     </div>
 
 <div class="row2">
-    <h2> INTERMEDIATE </h2>
+    <h2 class="INTERMEDIATE"> INTERMEDIATE </h2>
     <div class="row__posters">
-        <img src={{ url_for('static', filename='images/music-placeholder.png')}}>
-        <img src={{ url_for('static', filename='images/music-placeholder.png')}}>
-        <img src={{ url_for('static', filename='images/music-placeholder.png')}}>
-        <img src={{ url_for('static', filename='images/music-placeholder.png')}}>
-        <img src={{ url_for('static', filename='images/music-placeholder.png')}}>
-        <img src={{ url_for('static', filename='images/music-placeholder.png')}}>
-        <img src={{ url_for('static', filename='images/music-placeholder.png')}}>
-        <img src={{ url_for('static', filename='images/music-placeholder.png')}}>
+        <img class="album" src={{ url_for('static', filename='images/music-placeholder.png')}}>
+        <img class="album" src={{ url_for('static', filename='images/music-placeholder.png')}}>
+        <img class="album" src={{ url_for('static', filename='images/music-placeholder.png')}}>
+        <img class="album" src={{ url_for('static', filename='images/music-placeholder.png')}}>
+        <img class="album" src={{ url_for('static', filename='images/music-placeholder.png')}}>
+        <img class="album" src={{ url_for('static', filename='images/music-placeholder.png')}}>
+        <img class="album" src={{ url_for('static', filename='images/music-placeholder.png')}}>
     </div>
 
 <div class="row3">
-    <h2> ADVANCED </h2>
+    <h2 class="ADVANCED"> ADVANCED </h2>
     <div class="row__posters">
-        <img src={{ url_for('static', filename='images/music-placeholder.png')}}>
-        <img src={{ url_for('static', filename='images/music-placeholder.png')}}>
-        <img src={{ url_for('static', filename='images/music-placeholder.png')}}>
-        <img src={{ url_for('static', filename='images/music-placeholder.png')}}>
-        <img src={{ url_for('static', filename='images/music-placeholder.png')}}>
-        <img src={{ url_for('static', filename='images/music-placeholder.png')}}>
-        <img src={{ url_for('static', filename='images/music-placeholder.png')}}>
-        <img src={{ url_for('static', filename='images/music-placeholder.png')}}>
+        <img class="album" src={{ url_for('static', filename='images/music-placeholder.png')}}>
+        <img class="album" src={{ url_for('static', filename='images/music-placeholder.png')}}>
+        <img class="album" src={{ url_for('static', filename='images/music-placeholder.png')}}>
+        <img class="album" src={{ url_for('static', filename='images/music-placeholder.png')}}>
+        <img class="album" src={{ url_for('static', filename='images/music-placeholder.png')}}>
+        <img class="album" src={{ url_for('static', filename='images/music-placeholder.png')}}>
+        <img class="album" src={{ url_for('static', filename='images/music-placeholder.png')}}>
     </div>
 
 </body>
