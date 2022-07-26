@@ -14,43 +14,39 @@ pTime = 0
 cTime = 0
 
 
+def hand_tracking(camera_frame):
+    image_rgb = cv2.cvtColor(camera_frame, cv2.COLOR_BGR2RGB)
+    results = hands.process(image_rgb)
+    # print(results.multi_hand_landmarks)
+
+    if results.multi_hand_landmarks:
+        for handLms in results.multi_hand_landmarks:
+            for id, lm in enumerate(handLms.landmark):
+                # print(id,lm)
+                h, w, c = camera_frame.shape
+                cx, cy = int(lm.x * w), int(lm.y * h)
+                print(id, cx, cy)
+                if id == 0:
+                    cv2.circle(camera_frame, (cx, cy), 15, (255, 0, 255), cv2.FILLED)
+
+            mpDraw.draw_landmarks(camera_frame, handLms, mpHands.HAND_CONNECTIONS)
+
+            # cv2.imshow("Image", camera_frame)
+            # cv2.waitKey(1)
+
+
 def gen_frames():
     while True:
-        success, img = camera.read()
-        imgrgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-        results = hands.process(imgrgb)
-        # print(results.multi_hand_landmarks)
-
-        if results.multi_hand_landmarks:
-            for handLms in results.multi_hand_landmarks:
-                for id, lm in enumerate(handLms.landmark):
-                    # print(id,lm)
-                    h, w, c = img.shape
-                    cx, cy = int(lm.x * w), int(lm.y * h)
-                    print(id, cx, cy)
-                    if id == 0:
-                        cv2.circle(img, (cx, cy), 15, (255, 0, 255), cv2.FILLED)
-
-                mpDraw.draw_landmarks(img, handLms, mpHands.HAND_CONNECTIONS)
-
-        cTime = time.time()
-        fps = 1 / (cTime - pTime)
-        pTime = cTime
-
-        # cv2.putText(img,str(int(fps)),(10,70), cv2.FONT_HERSHEY_PLAIN,3
-        # (255,0,255),3)
-
-        cv2.imshow("Image", img)
-        cv2.waitKey(1)
-
-        # success, frame = camera.read()
-        # if not success:
-        #     break
-        # else:
-        #     ret, buffer = cv2.imencode('.jpg', frame)
-        #     frame = buffer.tobytes()
-        #     yield (b'--frame\r\n'
-        #            b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+        success, frame = camera.read()
+        image_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        if not success:
+            break
+        else:
+            hand_tracking(frame)
+            ret, buffer = cv2.imencode('.jpg', frame)
+            frame = buffer.tobytes()
+            yield (b'--frame\r\n'
+                   b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
 
 @app.route('/')
