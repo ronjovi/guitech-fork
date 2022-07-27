@@ -19,6 +19,8 @@ cTime = 0
 def hand_tracking(camera_frame):
     image_rgb = cv2.cvtColor(camera_frame, cv2.COLOR_BGR2RGB)
     results = hands.process(image_rgb)
+    fontScale = int (1)
+    font = cv2.FONT_HERSHEY_SIMPLEX
     # print(results.multi_hand_landmarks)
 
     if results.multi_hand_landmarks:
@@ -33,19 +35,24 @@ def hand_tracking(camera_frame):
                         print(id, cx, cy)
 
                         if id == 4:
-                            cv2.circle(camera_frame, (cx, cy), 15, (255, 0, 255), cv2.FILLED)
+                            cv2.circle(camera_frame, (cx, cy), 20, (255, 0, 255), cv2.FILLED)
+                            cv2.putText(camera_frame, "T", (cx - 8, cy+10), font, fontScale, (255, 255, 255), 2, cv2.LINE_AA )
 
                         if id == 8:
-                            cv2.circle(camera_frame, (cx, cy), 15, (255, 0, 255), cv2.FILLED)
+                            cv2.circle(camera_frame, (cx, cy), 20, (255, 0, 255), cv2.FILLED)
+                            cv2.putText(camera_frame, "1", (cx - 8, cy + 10), font, fontScale, (255, 255, 255), 2, cv2.LINE_AA)
 
                         if id == 12:
-                            cv2.circle(camera_frame, (cx, cy), 15, (255, 0, 255), cv2.FILLED)
+                            cv2.circle(camera_frame, (cx, cy), 20, (255, 0, 255), cv2.FILLED)
+                            cv2.putText(camera_frame, "2", (cx - 8, cy+10), font, fontScale, (255, 255, 255), 2, cv2.LINE_AA)
 
                         if id == 16:
-                            cv2.circle(camera_frame, (cx, cy), 15, (255, 0, 255), cv2.FILLED)
+                            cv2.circle(camera_frame, (cx, cy), 20, (255, 0, 255), cv2.FILLED)
+                            cv2.putText(camera_frame, "3", (cx - 8, cy+10), font, fontScale, (255, 255, 255), 2, cv2.LINE_AA)
 
                         if id == 20:
-                            cv2.circle(camera_frame, (cx, cy), 15, (255, 0, 255), cv2.FILLED)
+                            cv2.circle(camera_frame, (cx, cy), 20, (255, 0, 255), cv2.FILLED)
+                            cv2.putText(camera_frame, "4", (cx - 8, cy+10), font, fontScale, (255, 255, 255), 2, cv2.LINE_AA)
 
                 mpDraw.draw_landmarks(camera_frame, handLms, mpHands.HAND_CONNECTIONS)
 
