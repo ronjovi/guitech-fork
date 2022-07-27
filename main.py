@@ -23,30 +23,34 @@ def hand_tracking(camera_frame):
 
     if results.multi_hand_landmarks:
         for handLms in results.multi_hand_landmarks:
-            for id, lm in enumerate(handLms.landmark):
-                # print(id,lm)
-                h, w, c = camera_frame.shape
-                cx, cy = int(lm.x * w), int(lm.y * h)
-                print(id, cx, cy)
-                if id == 4:
-                    cv2.circle(camera_frame, (cx, cy), 15, (255, 0, 255), cv2.FILLED)
+                for id, lm in enumerate(handLms.landmark):
+                    # hidelist = [0, 1, 2, 5, 6, 9, 10, 13, 14, 17, 18]
+                    # for id in hidelist:
+                    #     if id != hidelist:
+                            # print(id,lm)
+                        h, w, c = camera_frame.shape
+                        cx, cy = int(lm.x * w), int(lm.y * h)
+                        print(id, cx, cy)
 
-                if id == 8:
-                    cv2.circle(camera_frame, (cx, cy), 15, (255, 0, 255), cv2.FILLED)
+                        if id == 4:
+                            cv2.circle(camera_frame, (cx, cy), 15, (255, 0, 255), cv2.FILLED)
 
-                if id == 12:
-                    cv2.circle(camera_frame, (cx, cy), 15, (255, 0, 255), cv2.FILLED)
+                        if id == 8:
+                            cv2.circle(camera_frame, (cx, cy), 15, (255, 0, 255), cv2.FILLED)
 
-                if id == 16:
-                    cv2.circle(camera_frame, (cx, cy), 15, (255, 0, 255), cv2.FILLED)
+                        if id == 12:
+                            cv2.circle(camera_frame, (cx, cy), 15, (255, 0, 255), cv2.FILLED)
 
-                if id == 20:
-                    cv2.circle(camera_frame, (cx, cy), 15, (255, 0, 255), cv2.FILLED)
+                        if id == 16:
+                            cv2.circle(camera_frame, (cx, cy), 15, (255, 0, 255), cv2.FILLED)
 
-            mpDraw.draw_landmarks(camera_frame, handLms, mpHands.HAND_CONNECTIONS)
+                        if id == 20:
+                            cv2.circle(camera_frame, (cx, cy), 15, (255, 0, 255), cv2.FILLED)
 
-            # cv2.imshow("Image", camera_frame)
-            # cv2.waitKey(1)
+                mpDraw.draw_landmarks(camera_frame, handLms, mpHands.HAND_CONNECTIONS)
+
+                # cv2.imshow("Image", camera_frame)
+                # cv2.waitKey(1)
 
 
 def gen_frames():
