@@ -14,7 +14,6 @@ body {
     max-height: 100px;
     margin-right: 10px;
     transition: transform 450ms;
-
 }
 
 .row__posters {
@@ -244,3 +243,4 @@ nav:hover{
     transition: all 0.5s ease;
 }
 */
+

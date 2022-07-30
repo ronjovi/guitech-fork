@@ -89,6 +89,9 @@ def OverlayImages():
 def index():
     return render_template('index.html')
 
+@app.route('/play_page')
+def play_page():
+    return render_template('play_page.html')
 
 @app.route('/camera_feed')
 def camera_feed():
@@ -99,6 +102,10 @@ def camera_feed():
 def video_camera():
     return Response(gen_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
+
+@app.route('/bob_marley_play_page.html')
+def bob_marley_play_page():
+    return render_template('bob_marley_play_page.html')
 
 if __name__ == '__main__':
     app.run()
