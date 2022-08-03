@@ -7,18 +7,22 @@ from flask import Flask, render_template, Response
 app = Flask(__name__)
 
 camera = cv2.VideoCapture(0)
-
+# hand tracking start
 mpHands = mp.solutions.hands
 hands = mpHands.Hands()
 mpDraw = mp.solutions.drawing_utils
-
-pTime = 0
-cTime = 0
+# images for overlay & size
+logo = cv2.imread("static/images/Group 3.png")
+size = 500
+logo = cv2.resize(logo, (size, size))
+img2gray = cv2.cvtColor(logo, cv2.COLOR_BGR2GRAY)
+ret, mask = cv2.threshold(img2gray, 1, 255, cv2.THRESH_BINARY)
 
 
 def hand_tracking(camera_frame):
     image_rgb = cv2.cvtColor(camera_frame, cv2.COLOR_BGR2RGB)
     results = hands.process(image_rgb)
+    # adds number to fi
     fontScale = int (1)
     font = cv2.FONT_HERSHEY_SIMPLEX
     # print(results.multi_hand_landmarks)
@@ -26,10 +30,6 @@ def hand_tracking(camera_frame):
     if results.multi_hand_landmarks:
         for handLms in results.multi_hand_landmarks:
                 for id, lm in enumerate(handLms.landmark):
-                    # hidelist = [0, 1, 2, 5, 6, 9, 10, 13, 14, 17, 18]
-                    # for id in hidelist:
-                    #     if id != hidelist:
-                            # print(id,lm)
                         h, w, c = camera_frame.shape
                         cx, cy = int(lm.x * w), int(lm.y * h)
                         print(id, cx, cy)
@@ -56,30 +56,23 @@ def hand_tracking(camera_frame):
 
                 mpDraw.draw_landmarks(camera_frame, handLms, mpHands.HAND_CONNECTIONS)
 
-                # cv2.imshow("Image", camera_frame)
-                # cv2.waitKey(1)
-
 
 def fret_overlay(frame):
-        hf, wf, cf = imgFront.shape
-        hb, wb, cb = frame.shape
-        result = cvzone.overlayPNG(frame, imgFront, [0, hb - hf])
-
-        cv2.imshow("Image", result)
-        cv2.waitKey(1)
+    # Region of Image (ROI), where we want to insert logo
+    roi = frame[-size - 10:-10, -size - 10:-10]
+    roi[np.where(mask)] = 0
+    roi += logo
+    cv2.imshow("WebCam", frame)
 
 
 def gen_frames():
     while True:
         success, frame = camera.read()
-        image_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-        # Show images
-        hf, wf, cf = imgFront.shape
-        hb, wb, cb = frame.shape
         if not success:
             break
         else:
             hand_tracking(frame)
+            fret_overlay(frame)
             ret, buffer = cv2.imencode('.jpg', frame)
             frame = buffer.tobytes()
             yield (b'--frame\r\n'

@@ -99,5 +99,14 @@
         <img class="album" src={{ url_for('static', filename='images/45.jpg')}}>
     </div>
 
+<button id="BlackBirdSong">Go to play page</button>
+    <script>
+        document.querySelector('#BlackBirdSong')
+            .addEventListener('click', () => {
+            location.href = ('/thebeatlesplaypage.html')
+            });
+    </script>
+
+
 </body>
 </html>

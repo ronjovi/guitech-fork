@@ -1,6 +1,5 @@
-
 body {
-    background: linear-gradient(to top, #fff, #000), url("../static/images/backgroundtest.jpg");
+    background: linear-gradient(to top, #fff, #000), url("../static/images/BlackBird.jpeg");
     background-repeat: no-repeat;
 }
 
@@ -46,40 +45,6 @@ background-color: rgba(0,0,0,1);
   left: 20%;
   transform: translate(-50%, -50%);
    font-size: 64px;
-}
-
-.Album{
- background-image: url("/static/images/21.jpg");
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: contain;
-  width: 100vw;
-  height: 99vh;
-  margin: 0px;
-}
-
-.PLAY{
-    position: absolute;
-  top: 42%;
-  center: 50%;
-  right: 46.4%;
-}
-
-.home {
-    position: absolute;
-  top: 85%;
-  left: 24%;
-}
-
-.record {
-    position: absolute;
-  top: 85%;
-  left: 16%;
-}
-.restart {
-    position: absolute;
-  top: 85%;
-  left: 8%;
 }
 
 .restarttext {

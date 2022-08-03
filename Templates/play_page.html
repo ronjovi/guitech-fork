@@ -10,26 +10,40 @@
 </head>
 <body>
 <div class="container">
-  <img class="Album" src="/static/images/21.jpg">
-  <div class="name">Album: The Bends</div>
-  <div class="artist">Artist(s): RadioHead</div>
-  <div class="year">1995</div>
-  <div class="time">4 min 18 seconds</div>
-  <div class="song_name">High and Dry</div>
+  <div class="content">
+    <div class="name">Album: The Bends</div>
+    <div class="artist">Artist(s): RadioHead</div>
+    <div class="year">1995</div>
+    <div class="time">4 min 18 seconds</div>
+    <div class="song_name">High and Dry</div>
 
-  <div class="restarttext"> RESTART </div>
-  <div class="recordtext"> RECORD </div>
-  <div class="playtext"> PLAY </div>
-  <div class="hometext"> </div>
+    <div class="restarttext"> RESTART </div>
+    <div class="recordtext"> RECORD </div>
+    <div class="playtext"> PLAY </div>
+    <div class="hometext"> HOME </div>
+  </div>
 
+  <button type="button" class="button">
 
+       <button id="redirect">PLAY</button>
+                <script>
+                    document.querySelector('#redirect')
+                        .addEventListener('click', () => {
+                            location.href = ('/camera_feed')
+                        });
+                </script>
 
-
-
-  <button class="play" type="button">PLAY</button>
   <button class="restart" type="button">RESTART</button>
   <button class="record" type="button">RECORD</button>
   <button class="home" type="button">HOME</button>
+      <button id="home">HOME</button>
+                <script>
+                    document.querySelector('#home')
+                        .addEventListener('click', () => {
+                            location.href = ('/')
+                        });
+                </script>
+
 </div>
 
 </body>
