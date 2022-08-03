@@ -60,10 +60,22 @@ def hand_tracking(camera_frame):
                 # cv2.waitKey(1)
 
 
+def fret_overlay(frame):
+        hf, wf, cf = imgFront.shape
+        hb, wb, cb = frame.shape
+        result = cvzone.overlayPNG(frame, imgFront, [0, hb - hf])
+
+        cv2.imshow("Image", result)
+        cv2.waitKey(1)
+
+
 def gen_frames():
     while True:
         success, frame = camera.read()
         image_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        # Show images
+        hf, wf, cf = imgFront.shape
+        hb, wb, cb = frame.shape
         if not success:
             break
         else:
@@ -73,25 +85,16 @@ def gen_frames():
             yield (b'--frame\r\n'
                    b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
-def OverlayImages():
-    imgBack = cv2.imread("static/images/GuitarFrets.jpg")
-    imgFront = cv2.imread("static/images/GuitarFrets.jpg", cv2.IMREAD_UNCHANGED)
-
-    imgBack[0:300, 0:300] = imgFront
-
-    imgResult = cvzone.overlayPNG(imgBack, imgFront, [20, 20])
-
-    cv2.imshow("Image", imgResult)
-    cv2.waitKey(0)
-
 
 @app.route('/')
 def index():
     return render_template('index.html')
 
+
 @app.route('/play_page')
 def play_page():
     return render_template('play_page.html')
+
 
 @app.route('/camera_feed')
 def camera_feed():
@@ -103,9 +106,10 @@ def video_camera():
     return Response(gen_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
-@app.route('/bob_marley_play_page.html')
-def bob_marley_play_page():
-    return render_template('bob_marley_play_page.html')
+@app.route('/thebeatlesplaypage.html')
+def thebeatlesplaypage():
+    return render_template('thebeatlesplaypage.html')
+
 
 if __name__ == '__main__':
     app.run()
