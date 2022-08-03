@@ -13,8 +13,9 @@ hands = mpHands.Hands()
 mpDraw = mp.solutions.drawing_utils
 # images for overlay & size
 logo = cv2.imread("static/images/Group 3.png")
-size = 500
-logo = cv2.resize(logo, (size, size))
+height = 150
+width = 1270
+logo = cv2.resize(logo, (width, height))
 img2gray = cv2.cvtColor(logo, cv2.COLOR_BGR2GRAY)
 ret, mask = cv2.threshold(img2gray, 1, 255, cv2.THRESH_BINARY)
 
@@ -59,11 +60,23 @@ def hand_tracking(camera_frame):
 
 def fret_overlay(frame):
     # Region of Image (ROI), where we want to insert logo
-    roi = frame[-size - 10:-10, -size - 10:-10]
+    roi = frame[-height - 10:-10, -width - 10:-10]
     roi[np.where(mask)] = 0
     roi += logo
     cv2.imshow("WebCam", frame)
+    # dot
+    radius = 150
+    paint_h = int(height / 2)  # will be painted in the middle
 
+    fourcc = VideoWriter_fourcc(*'MP42')
+    video = VideoWriter('./circle_noise.avi', fourcc, float(FPS), (width, height))
+
+    for paint_x in range(-radius, width+radius, 6):
+        frame = np.random.randint(0, 256,
+                                  (height, width, 3),
+                                  dtype=np.uint8)
+        cv2.circle(frame, (paint_x, paint_h), radius, (0, 0, 0), -1)
+        video.write(frame)
 
 def gen_frames():
     while True:
