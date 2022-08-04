@@ -1,5 +1,5 @@
 body {
-    background: linear-gradient(to top, #fff, #000), url("../static/images/BlackBird.jpeg");
+    /*background: linear-gradient(to top, #fff, #000),*/ url("../static/images/BlackBird.jpeg");
     background-repeat: no-repeat;
 }
 
