@@ -65,18 +65,18 @@ def fret_overlay(frame):
     roi += logo
     cv2.imshow("WebCam", frame)
     # dot
-    radius = 150
-    paint_h = int(height / 2)  # will be painted in the middle
-
-    fourcc = VideoWriter_fourcc(*'MP42')
-    video = VideoWriter('./circle_noise.avi', fourcc, float(FPS), (width, height))
-
-    for paint_x in range(-radius, width+radius, 6):
-        frame = np.random.randint(0, 256,
-                                  (height, width, 3),
-                                  dtype=np.uint8)
-        cv2.circle(frame, (paint_x, paint_h), radius, (0, 0, 0), -1)
-        video.write(frame)
+    # radius = 150
+    # paint_h = int(height / 2)  # will be painted in the middle
+    #
+    # fourcc = VideoWriter_fourcc(*'MP42')
+    # video = VideoWriter('./circle_noise.avi', fourcc, float(FPS), (width, height))
+    #
+    # for paint_x in range(-radius, width+radius, 6):
+    #     frame = np.random.randint(0, 256,
+    #                               (height, width, 3),
+    #                               dtype=np.uint8)
+    #     cv2.circle(frame, (paint_x, paint_h), radius, (0, 0, 0), -1)
+    #     video.write(frame)
 
 def gen_frames():
     while True:
