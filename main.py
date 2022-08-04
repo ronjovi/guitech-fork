@@ -18,6 +18,7 @@ width = 1270
 logo = cv2.resize(logo, (width, height))
 img2gray = cv2.cvtColor(logo, cv2.COLOR_BGR2GRAY)
 ret, mask = cv2.threshold(img2gray, 1, 255, cv2.THRESH_BINARY)
+circlex = 300
 
 
 def hand_tracking(camera_frame):
@@ -63,15 +64,15 @@ def fret_overlay(frame):
     roi = frame[-height - 10:-10, -width - 10:-10]
     roi[np.where(mask)] = 0
     roi += logo
-    circlex = 300
+
+def greendots(frame, circlex):
     circley = 595
     # while (camera.isOpened()):
     # ret, frame = camera.read()
-    frame = cv2.circle(frame, (300, 595), 18, (140, 234, 153), -1)
+    frame = cv2.circle(frame, (circlex, 595), 18, (140, 234, 153), -1)
     frame = cv2.circle(frame, (390, 675), 18, (140, 234, 153), -1)
     cv2.imshow("WebCam", frame)
-    # circlex = circlex - 1
-
+    circlex = circlex -1
 def gen_frames():
     while True:
         success, frame = camera.read()
@@ -80,6 +81,7 @@ def gen_frames():
         else:
             hand_tracking(frame)
             fret_overlay(frame)
+            greendots(frame, circlex)
             ret, buffer = cv2.imencode('.jpg', frame)
             frame = buffer.tobytes()
             yield (b'--frame\r\n'
