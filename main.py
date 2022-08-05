@@ -4,9 +4,15 @@ import time
 import cvzone
 import numpy as np
 from flask import Flask, render_template, Response
+
+from Fret import Fret
+
 app = Flask(__name__)
 
-camera = cv2.VideoCapture(0)
+# COLORS
+COLOR_GREEN = (140, 234, 153)
+
+
 # hand tracking start
 mpHands = mp.solutions.hands
 hands = mpHands.Hands()
@@ -18,45 +24,44 @@ width = 1270
 logo = cv2.resize(logo, (width, height))
 img2gray = cv2.cvtColor(logo, cv2.COLOR_BGR2GRAY)
 ret, mask = cv2.threshold(img2gray, 1, 255, cv2.THRESH_BINARY)
-circlex = 300
 
 
 def hand_tracking(camera_frame):
     image_rgb = cv2.cvtColor(camera_frame, cv2.COLOR_BGR2RGB)
     results = hands.process(image_rgb)
     # adds number to fi
-    fontScale = int (1)
+    fontScale = int(1)
     font = cv2.FONT_HERSHEY_SIMPLEX
     # print(results.multi_hand_landmarks)
 
     if results.multi_hand_landmarks:
         for handLms in results.multi_hand_landmarks:
-                for id, lm in enumerate(handLms.landmark):
-                        h, w, c = camera_frame.shape
-                        cx, cy = int(lm.x * w), int(lm.y * h)
-                        print(id, cx, cy)
+            for id, lm in enumerate(handLms.landmark):
+                h, w, c = camera_frame.shape
+                cx, cy = int(lm.x * w), int(lm.y * h)
+                print(id, cx, cy)
 
-                        if id == 4:
-                            cv2.circle(camera_frame, (cx, cy), 20, (255, 0, 255), cv2.FILLED)
-                            cv2.putText(camera_frame, "T", (cx - 8, cy+10), font, fontScale, (255, 255, 255), 2, cv2.LINE_AA )
+                if id == 4:
+                    cv2.circle(camera_frame, (cx, cy), 20, (255, 0, 255), cv2.FILLED)
+                    cv2.putText(camera_frame, "T", (cx - 8, cy + 10), font, fontScale, (255, 255, 255), 2, cv2.LINE_AA)
 
-                        if id == 8:
-                            cv2.circle(camera_frame, (cx, cy), 20, (255, 0, 255), cv2.FILLED)
-                            cv2.putText(camera_frame, "1", (cx - 8, cy + 10), font, fontScale, (255, 255, 255), 2, cv2.LINE_AA)
+                if id == 8:
+                    cv2.circle(camera_frame, (cx, cy), 20, (255, 0, 255), cv2.FILLED)
+                    cv2.putText(camera_frame, "1", (cx - 8, cy + 10), font, fontScale, (255, 255, 255), 2, cv2.LINE_AA)
 
-                        if id == 12:
-                            cv2.circle(camera_frame, (cx, cy), 20, (255, 0, 255), cv2.FILLED)
-                            cv2.putText(camera_frame, "2", (cx - 8, cy+10), font, fontScale, (255, 255, 255), 2, cv2.LINE_AA)
+                if id == 12:
+                    cv2.circle(camera_frame, (cx, cy), 20, (255, 0, 255), cv2.FILLED)
+                    cv2.putText(camera_frame, "2", (cx - 8, cy + 10), font, fontScale, (255, 255, 255), 2, cv2.LINE_AA)
 
-                        if id == 16:
-                            cv2.circle(camera_frame, (cx, cy), 20, (255, 0, 255), cv2.FILLED)
-                            cv2.putText(camera_frame, "3", (cx - 8, cy+10), font, fontScale, (255, 255, 255), 2, cv2.LINE_AA)
+                if id == 16:
+                    cv2.circle(camera_frame, (cx, cy), 20, (255, 0, 255), cv2.FILLED)
+                    cv2.putText(camera_frame, "3", (cx - 8, cy + 10), font, fontScale, (255, 255, 255), 2, cv2.LINE_AA)
 
-                        if id == 20:
-                            cv2.circle(camera_frame, (cx, cy), 20, (255, 0, 255), cv2.FILLED)
-                            cv2.putText(camera_frame, "4", (cx - 8, cy+10), font, fontScale, (255, 255, 255), 2, cv2.LINE_AA)
+                if id == 20:
+                    cv2.circle(camera_frame, (cx, cy), 20, (255, 0, 255), cv2.FILLED)
+                    cv2.putText(camera_frame, "4", (cx - 8, cy + 10), font, fontScale, (255, 255, 255), 2, cv2.LINE_AA)
 
-                mpDraw.draw_landmarks(camera_frame, handLms, mpHands.HAND_CONNECTIONS)
+            mpDraw.draw_landmarks(camera_frame, handLms, mpHands.HAND_CONNECTIONS)
 
 
 def fret_overlay(frame):
@@ -65,47 +70,100 @@ def fret_overlay(frame):
     roi[np.where(mask)] = 0
     roi += logo
 
-def greendots(frame, circlex):
-    circley = 595
-    # while (camera.isOpened()):
-    # ret, frame = camera.read()
-    frame = cv2.circle(frame, (circlex, 595), 18, (140, 234, 153), -1)
-    frame = cv2.circle(frame, (390, 675), 18, (140, 234, 153), -1)
-    cv2.imshow("WebCam", frame)
-    circlex = circlex -1
-def gen_frames():
-    while True:
-        success, frame = camera.read()
-        if not success:
-            break
+
+def render_frets(frame, frets):
+    for fret in frets:
+        # only move and print if circle has not moved out of screen
+        if fret.x > -fret.radius:
+            # update x pos - moves right to left
+            fret.update_x()
+            # create circle
         else:
-            hand_tracking(frame)
-            fret_overlay(frame)
-            greendots(frame, circlex)
-            ret, buffer = cv2.imencode('.jpg', frame)
-            frame = buffer.tobytes()
-            yield (b'--frame\r\n'
-                   b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+            fret.reset(frame.shape[1], frame.shape[0])
+        cv2.circle(frame, (fret.x, fret.y), fret.radius, COLOR_GREEN, -1)
 
 
+# Starts the playing the song
+# Once total song time length has elapsed,
+# end game
+def start_song():
+    camera = cv2.VideoCapture(1)  # CHANGE BACK TO CAM 0
+    is_playing = True
+    frets_ready = False
+
+    song_seconds = 10000
+    song_total_seconds = 60 + song_seconds
+
+    frets = [
+        Fret(2000, 300, 15, 1),
+        Fret(2000, 200, 15, 2),
+        Fret(2000, 300, 15, 3),
+        Fret(2000, 300, 15, 4),
+        Fret(2000, 300, 15, 5),
+        # Fret(2000, 300, 15, 6),
+    ]
+
+    prevTime = time.time()
+    while is_playing:
+        # start reading camera frames
+        success, frame = camera.read()
+
+        # handle camera err
+        if not success:
+            is_playing = False
+            break
+
+        if not frets_ready:
+            for fret in frets:
+                fret.reset(frame.shape[1], frame.shape[0])
+            frets_ready = True
+
+        # adds fret overlay to video feed
+        fret_overlay(frame)
+
+        #hand_tracking(frame)
+        render_frets(frame, frets)
+
+        # encode to jpg and render to screen
+        ret, buffer = cv2.imencode('.jpg', frame)
+        frame = buffer.tobytes()
+        yield (b'--frame\r\n'
+               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+
+        currTime = time.time()
+
+        # has sec passed
+        if currTime - prevTime >= 1:
+            prevTime = currTime
+            song_total_seconds = song_total_seconds - 1
+
+
+
+    print('done')
+
+
+# first page of app
+# Here users can select a song to play
 @app.route('/')
 def index():
     return render_template('index.html')
 
 
-@app.route('/play_page')
-def play_page():
-    return render_template('play_page.html')
+# Second page of app
+# Here users can view the song details
+@app.route('/song_details')
+def song_details():
+    return render_template('song_details.html')
 
 
-@app.route('/camera_feed')
-def camera_feed():
-    return render_template('camera_feed.html')
+@app.route('/play_song')
+def play_song():
+    return render_template('play_song.html')
 
 
 @app.route('/video_camera')
 def video_camera():
-    return Response(gen_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
+    return Response(start_song(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
 @app.route('/thebeatlesplaypage.html')

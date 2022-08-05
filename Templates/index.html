@@ -6,16 +6,16 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-  <div class="22">
-      <nav>
-          <h2 class="logo">GUITECH</h2>
-          <ul>
-            <li><a href="#">HOME</a> </li>
-            <li><a href="#">PLAY</a> </li>
-          </ul>
-          <button type="button">Login</button>
-      </nav>
-  </div>
+<div class="22">
+    <nav>
+        <h2 class="logo">GUITECH</h2>
+        <!--          <ul>-->
+        <!--            <li><a href="#">HOME</a> </li>-->
+        <!--            <li><a href="#">PLAY</a> </li>-->
+        <!--          </ul>-->
+        <!--          <button type="button">Login</button>-->
+    </nav>
+</div>
 
 <!--  <div class="image">-->
 <!--      <img class="image__img" src={{ url_for('static', filename='images/music-placeholder.png')}}>-->
@@ -66,47 +66,77 @@
 
 
 <div class="row1">
-    <h2 class="BEGINNER"> BEGINNER </h2>
+    <h2 class="row_title"> BEGINNER </h2>
     <div class="row__posters">
-            <img class="album" src={{ url_for('static', filename='images/TheBeatles.jpeg')}}>
-        <img class="album" src={{ url_for('static', filename='images/BobMarley.jpeg')}}>
-        <img class="album" src={{ url_for('static', filename='images/BlessidUnion.jpeg')}}>
-        <img class="album" src={{ url_for('static', filename='images/20.jpg')}}>
-        <img class="album" src={{ url_for('static', filename='images/19.jpg')}}>
-        <img class="album" src={{ url_for('static', filename='images/21.jpg')}}>
-        <img class="album" src={{ url_for('static', filename='images/23.jpg')}}>
+
+        <a class="album" href="{{ url_for('song_details') }}">
+            <img src={{ url_for('static', filename='images/TheBeatles.jpeg')}}>
+            <div class="overlay"><h1 class="album_title">Song Name</h1></div>
+        </a>
+
+        <a class="album" href="{{ url_for('song_details') }}">
+            <img src={{ url_for('static', filename='images/BobMarley.jpeg')}}>
+            <div class="overlay"><h1 class="album_title">Song Name</h1></div>
+        </a>
+
+        <a class="album" href="{{ url_for('song_details') }}">
+            <img src={{ url_for('static', filename='images/BlessidUnion.jpeg')}}>
+               <div class="overlay"><h1 class="album_title">Song Name</h1></div>
+        </a>
+
+        <a class="album" href="{{ url_for('song_details') }}">
+            <img src={{ url_for('static', filename='images/20.jpeg')}}>
+               <div class="overlay"><h1 class="album_title">Song Name</h1></div>
+        </a>
+
+        <a class="album" href="{{ url_for('song_details') }}">
+            <img src={{ url_for('static', filename='images/19.jpeg')}}>
+               <div class="overlay"><h1 class="album_title">Song Name</h1></div>
+        </a>
+
+        <a class="album" href="{{ url_for('song_details') }}">
+        <img src={{ url_for('static', filename='images/21.jpeg')}}>
+                   <div class="overlay"><h1 class="album_title">Song Name</h1></div>
+        </a>
+
+        <a class="album" href="{{ url_for('song_details') }}">
+        <img src={{ url_for('static', filename='images/23.jpeg')}}>
+                   <div class="overlay"><h1 class="album_title">Song Name</h1></div>
+        </a>
     </div>
 
-<div class="row2">
-    <h2 class="INTERMEDIATE"> INTERMEDIATE </h2>
-    <div class="row__posters">
-        <img class="album" src={{ url_for('static', filename='images/50.png')}}>
-        <img class="album" src={{ url_for('static', filename='images/51.jpg')}}>
-        <img class="album" src={{ url_for('static', filename='images/52.jpg')}}>
-        <img class="album" src={{ url_for('static', filename='images/53.jpg')}}>
-        <img class="album" src={{ url_for('static', filename='images/54.jpg')}}>
-        <img class="album" src={{ url_for('static', filename='images/55.jpg')}}>
-    </div>
+    <!--    <div class="row2">-->
+    <!--        <h2 class="INTERMEDIATE"> INTERMEDIATE </h2>-->
+    <!--        <div class="row__posters">-->
+    <!--            <img class="album" src={{ url_for('static', filename='images/50.png')}}>-->
+    <!--            <img class="album" src={{ url_for('static', filename='images/51.jpg')}}>-->
+    <!--            <img class="album" src={{ url_for('static', filename='images/52.jpg')}}>-->
+    <!--            <img class="album" src={{ url_for('static', filename='images/53.jpg')}}>-->
+    <!--            <img class="album" src={{ url_for('static', filename='images/54.jpg')}}>-->
+    <!--            <img class="album" src={{ url_for('static', filename='images/55.jpg')}}>-->
+    <!--        </div>-->
+    <!--        -->
+    <!--    </div>-->
 
-<div class="row3">
-    <h2 class="ADVANCED"> ADVANCED </h2>
-    <div class="row__posters">
-        <img class="album" src={{ url_for('static', filename='images/40.jpg')}}>
-        <img class="album" src={{ url_for('static', filename='images/41.jpg')}}>
-        <img class="album" src={{ url_for('static', filename='images/42.jpg')}}>
-        <img class="album" src={{ url_for('static', filename='images/43.jpg')}}>
-        <img class="album" src={{ url_for('static', filename='images/44.jpg')}}>
-        <img class="album" src={{ url_for('static', filename='images/45.jpg')}}>
-    </div>
+    <!--        <div class="row3">-->
+    <!--            <h2 class="ADVANCED"> ADVANCED </h2>-->
+    <!--            <div class="row__posters">-->
+    <!--                <img class="album" src={{ url_for('static', filename='images/40.jpg')}}>-->
+    <!--                <img class="album" src={{ url_for('static', filename='images/41.jpg')}}>-->
+    <!--                <img class="album" src={{ url_for('static', filename='images/42.jpg')}}>-->
+    <!--                <img class="album" src={{ url_for('static', filename='images/43.jpg')}}>-->
+    <!--                <img class="album" src={{ url_for('static', filename='images/44.jpg')}}>-->
+    <!--                <img class="album" src={{ url_for('static', filename='images/45.jpg')}}>-->
+    <!--            </div>-->
 
-<button id="BlackBirdSong">Go to play page</button>
-    <script>
-        document.querySelector('#BlackBirdSong')
-            .addEventListener('click', () => {
-            location.href = ('/thebeatlesplaypage.html')
-            });
-    </script>
+    <!--<button id="BlackBirdSong">Go to play page</button>-->
+    <!--    <script>-->
+    <!--        document.querySelector('#BlackBirdSong')-->
+    <!--            .addEventListener('click', () => {-->
+    <!--            location.href = ('/thebeatlesplaypage.html')-->
+    <!--            });-->
+    <!--    </script>-->
 
 
-</body>
+    <!--</body>-->
 </html>
