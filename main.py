@@ -90,10 +90,11 @@ def start_song():
     camera = cv2.VideoCapture(1)  # CHANGE BACK TO CAM 0
     is_playing = True
     frets_ready = False
+    song_minutes = 4
+    song_seconds = 30
+    song_total_seconds = song_minutes * 60 + song_seconds
 
-    song_seconds = 10000
-    song_total_seconds = 60 + song_seconds
-
+    # create frets
     frets = [
         Fret(2000, 300, 15, 1),
         Fret(2000, 200, 15, 2),
@@ -103,8 +104,10 @@ def start_song():
         # Fret(2000, 300, 15, 6),
     ]
 
+    # get start time
     prevTime = time.time()
-    while is_playing:
+
+    while song_total_seconds > 0:
         # start reading camera frames
         success, frame = camera.read()
 
